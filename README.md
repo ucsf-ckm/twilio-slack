@@ -41,9 +41,8 @@ To set up a slash-command in Slack to send SMS messages:
   Lambda URL for the Request URL.
 * If you wish to restrict access to the slash command to a single channel, put
   the channel ID in the `SLACK_CHANNEL_ID` environment variable.
-* Be sure to install your Slack slash-command app in the appropriate channel on
-  your Slack! Unless you want the whole world to be able to send stuff from your
-  Twilio number, you'll want to make sure you do *not* publish/distribute your
-  app. :-D
+* Be sure to install your Slack slash-command app in your Slack, of course.
+  Unless you want the whole world to be able to send stuff from your Twilio
+  number, you'll want to make sure you do *not* publish/distribute your app. :-D
 
 Phew! That was a lot of steps! But you're done! Try it out!
