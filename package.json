@@ -4,7 +4,7 @@
   "description": "Send and receive SMS messages in Slack via Twilio",
   "main": "handler.js",
   "scripts": {
-    "test": "semistandard --fix *.js"
+    "test": "semistandard --fix *.js && jest"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "twilio": "^3.16.0"
   },
   "devDependencies": {
+    "jest": "^23.0.0",
     "semistandard": "^12.0.1"
   }
 }

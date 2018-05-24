@@ -8,7 +8,7 @@ const response = {statusCode: 200, headers: {'Content-Type': 'application/json'}
 exports.handler = function (event, context, callback) {
   const parsed = querystring.parse(event.body);
 
-  if (parsed.token !== process.env.SLACK_VALIDATION_TOKEN) {
+  if (!parsed.token || parsed.token !== process.env.SLACK_VALIDATION_TOKEN) {
     response.body = JSON.stringify({text: 'Message not sent: Invalid Slack token.'});
     return callback(null, response);
   }
