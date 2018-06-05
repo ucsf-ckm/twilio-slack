@@ -16,6 +16,10 @@
     "url": "https://github.com/ucsf-ckm/twilio-slack/issues"
   },
   "homepage": "https://github.com/ucsf-ckm/twilio-slack#readme",
+  "jest": {
+    "collectCoverage": true,
+    "verbose": true
+  },
   "dependencies": {
     "twilio": "^3.16.0"
   },
