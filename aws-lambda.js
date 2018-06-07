@@ -21,17 +21,24 @@ exports.handler = function (event, context, callback) {
 
   const data = parsed.text || '';
 
-  const toPhone = data.substr(0, data.indexOf(' '));
-  if (!/^\+1[0-9]{10}$/.test(toPhone)) {
-    response.body = JSON.stringify({text: `Message not sent: Phone number must be in +1XXXXXXXXXX format: "${toPhone}"`});
+  if (!/^\+1[0-9]{10}\b/.test(data)) {
+    response.body = JSON.stringify({text: `Message not sent: Phone number must be in +1XXXXXXXXXX format: "${data}"`});
     return callback(null, response);
   }
 
-  const body = data.substr(data.indexOf(' ') + 1);
-  if (!/[\S]/.test) {
+  const spaceIndex = data.indexOf(' ');
+  if (spaceIndex !== 12) {
+    response.body = JSON.stringify({text: 'Message not sent: Phone number must be followed by a space.'});
+    return callback(null, response);
+  }
+
+  const body = data.substr(spaceIndex + 1);
+  if (!/[\S]/.test(body)) {
     response.body = JSON.stringify({text: 'Message not sent: Message body cannot be empty.'});
     return callback(null, response);
   }
+
+  const toPhone = data.substr(0, spaceIndex);
 
   const responseUrl = parsed.response_url;
   if (!responseUrl) {
