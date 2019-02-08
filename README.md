@@ -20,7 +20,7 @@ To set up a slash-command in Slack to send SMS messages:
 * Run `rm -rf node_modules && npm install --production`.
 * Copy `aws-lambda.js` to `index.js`.
 * Create a zip file of the resulting `node_modules` directory along with the
-  `index.js` file. (`zip -r index.js node_modules/`)
+  `index.js` file. (`zip -r out.zip index.js node_modules/`)
 * Upload that zip file as your Lambda function.
 * In API Gateway:
   * API: LambadMicroservice
