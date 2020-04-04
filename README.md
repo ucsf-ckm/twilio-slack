@@ -2,8 +2,6 @@
 
 Send and receive SMS messages in Slack with Twilio and AWS Lambda.
 
-<img src="https://travis-ci.org/ucsf-ckm/twilio-slack.svg?branch=master">
-
 Assuming you have a Slack channel and a Twilio number already:
 
 * Create a Slack webhook. Make a note of the URL.
