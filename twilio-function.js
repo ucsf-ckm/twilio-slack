@@ -21,7 +21,7 @@ exports.handler = (context, event, callback) => {
   const encodedFrom = encode(From);
   const encodedTo = encode(To);
 
-  // Construct a payload for slack's incoming webhooks
+  // Construct a payload for Slack's incoming webhooks
   const slackBody = JSON.stringify({
     attachments: [
       {
