@@ -46,3 +46,11 @@ To set up a slash-command in Slack to send SMS messages:
   number, you'll want to make sure you do *not* publish/distribute your app. :-D
 
 Phew! That was a lot of steps! But you're done! Try it out!
+
+## Troubleshooting
+
+If you find your Lambda function is timing out a lot, try increasing memory from
+the default 128Mb to 256Mb and the timeout from 3s to 10s. These settings were
+cribbed from https://www.twilio.com/blog/aws-lambda-layers-node-js-twilio-sms
+where they were provided without much explanation. But it seemed to resolve the
+issue for me when it cropped up. ¯\\_(ツ)_/¯
