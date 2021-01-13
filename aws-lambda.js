@@ -1,7 +1,6 @@
 'use strict';
 
 const querystring = require('querystring');
-const twilio = require('twilio');
 
 const response = { statusCode: 200, headers: { 'Content-Type': 'application/json' } };
 
@@ -49,7 +48,7 @@ exports.handler = function (event, context, callback) {
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
 
-  const client = twilio(accountSid, authToken);
+  const client = require('twilio')(accountSid, authToken, { lazyLoading: true });
 
   client.messages.create({
     to: toPhone,
