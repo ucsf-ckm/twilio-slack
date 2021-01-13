@@ -39,12 +39,6 @@ exports.handler = function (event, context, callback) {
 
   const toPhone = data.substr(0, spaceIndex);
 
-  const responseUrl = parsed.response_url;
-  if (!responseUrl) {
-    response.body = JSON.stringify({ text: 'Message not sent: Did not get a response_url' });
-    return callback(null, response);
-  }
-
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
 
@@ -57,5 +51,5 @@ exports.handler = function (event, context, callback) {
   }).then(() => {
     response.body = JSON.stringify({ response_type: 'in_channel', text: `Message sent to ${toPhone}: ${body}` });
     callback(null, response);
-  }).catch();
+  }).catch((error) => { console.log(error); });
 };
