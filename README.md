@@ -15,7 +15,7 @@ To set up a slash-command in Slack to send SMS messages:
 
 * Create an AWS Lambda function. My settings:
   * Name: slackToSms
-  * Runtime: Node.js 12.x
+  * Runtime: Node.js 16.x
   * Role: lambda_basic_execution
 * Run `rm -rf node_modules && npm install --production`.
 * Copy `aws-lambda.js` to `index.js`.
