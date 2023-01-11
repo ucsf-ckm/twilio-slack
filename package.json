@@ -2,9 +2,9 @@
   "name": "twilio-slack",
   "version": "1.1.1",
   "description": "Send and receive SMS messages in Slack via Twilio",
-  "main": "handler.js",
+  "main": "twilio-function.js",
   "scripts": {
-    "test": "semistandard *.js && jest"
+    "test": "standard"
   },
   "repository": {
     "type": "git",
@@ -16,15 +16,7 @@
     "url": "https://github.com/ucsf-ckm/twilio-slack/issues"
   },
   "homepage": "https://github.com/ucsf-ckm/twilio-slack#readme",
-  "jest": {
-    "collectCoverage": true,
-    "verbose": true
-  },
   "dependencies": {
-    "twilio": "^3.28.0"
-  },
-  "devDependencies": {
-    "jest": "^29.0.1",
-    "semistandard": "^16.0.0"
+    "standard": "^17.0.0"
   }
 }

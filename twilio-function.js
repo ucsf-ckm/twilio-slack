@@ -1,6 +1,6 @@
 /* global Twilio */
 
-const https = require('https');
+const https = require('https')
 
 // Make sure to declare SLACK_WEBHOOK_PATH in your Environment
 // variables at
@@ -8,18 +8,18 @@ const https = require('https');
 
 exports.handler = (context, event, callback) => {
   // Extract the bits of the message we want
-  const { To, From, Body } = event;
-  const images = [];
+  const { To, From, Body } = event
+  const images = []
   while (event['MediaUrl' + images.length]) {
-    images.push(event['MediaUrl' + images.length]);
+    images.push(event['MediaUrl' + images.length])
   }
-  const bodyWithImages = [Body].concat(images).join('\n\nAttached media: ');
+  const bodyWithImages = [Body].concat(images).join('\n\nAttached media: ')
   function encode (field) {
-    return field.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return field.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   }
-  const encodedBody = encode(bodyWithImages);
-  const encodedFrom = encode(From);
-  const encodedTo = encode(To);
+  const encodedBody = encode(bodyWithImages)
+  const encodedFrom = encode(From)
+  const encodedTo = encode(To)
 
   // Construct a payload for Slack's incoming webhooks
   const slackBody = JSON.stringify({
@@ -47,26 +47,26 @@ exports.handler = (context, event, callback) => {
         color: '#5555AA'
       }
     ]
-  });
+  })
 
   // Account for emoji
   function byteLength (str) {
     // returns the byte length of an utf8 string
-    let s = str.length;
+    let s = str.length
     for (let i = str.length - 1; i >= 0; i--) {
-      const code = str.charCodeAt(i);
+      const code = str.charCodeAt(i)
       if (code > 0x7f && code <= 0x7ff) {
-        s++;
+        s++
       } else if (code > 0x7ff && code <= 0xffff) {
-        s += 2;
+        s += 2
       }
       if (code >= 0xDC00 && code <= 0xDFFF) {
-        i--; // trail surrogate
+        i-- // trail surrogate
       }
     }
-    return s;
+    return s
   }
-  const slackBodyLength = byteLength(slackBody);
+  const slackBodyLength = byteLength(slackBody)
 
   // Form our request specification
   const options = {
@@ -78,23 +78,23 @@ exports.handler = (context, event, callback) => {
       'Content-Type': 'application/json',
       'Content-Length': slackBodyLength
     }
-  };
-  console.log(slackBody, '===', slackBody.length);
+  }
+  console.log(slackBody, '===', slackBody.length)
 
   // send the request
   const post = https.request(options, res => {
     // only respond once we're done, or Twilio's functions
     // may kill our execution before we finish.
-    res.on('error', (e) => { console.log('res ERROR:', e); });
-    res.on('data', (chunk) => { console.log('res CHUNK:', chunk.toString()); });
+    res.on('error', (e) => { console.log('res ERROR:', e) })
+    res.on('data', (chunk) => { console.log('res CHUNK:', chunk.toString()) })
     res.on('end', () => {
       // respond with an empty message
-      callback(null, new Twilio.twiml.MessagingResponse());
-    });
-  });
-  post.on('error', e => { console.log('post ERROR:', e); });
-  post.on('drain', () => { post.end(); });
+      callback(null, new Twilio.twiml.MessagingResponse())
+    })
+  })
+  post.on('error', e => { console.log('post ERROR:', e) })
+  post.on('drain', () => { post.end() })
   if (post.write(slackBody)) {
-    post.end();
+    post.end()
   }
-};
+}
